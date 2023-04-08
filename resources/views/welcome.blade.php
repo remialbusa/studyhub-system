@@ -62,7 +62,7 @@
 
             <!-- image -->
             <div class="md:block hidden w-1/2">
-                <img class=" rounded-2xl" src="login-sec.jpg" alt="">
+                <img class=" rounded-2xl" src="studyhub-bg.jpg" alt="">
             </div>
 
 
