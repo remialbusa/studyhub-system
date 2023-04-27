@@ -7,8 +7,16 @@ module.exports = {
   ],
   
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        Rampart: ["Rampart One", "cursive"],
+       },
+    },
   },
   plugins: [],
+
+ 
+  
+
 }
 

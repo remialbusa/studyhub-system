@@ -21,9 +21,13 @@ use Illuminate\Support\Facades\Route;
  */
 
  //This route is for the login page
-Route::get('/', function () {
-    return view('login-page');
-});
+/* Route::get('/', function () {
+    return view('landing-page');
+}); */
+
+
+//Route for Landing Page
+Route::get('/', [HomeController::class,'landingPage'])->name('landing-page');
 
 //Route for registration button
 Route::get('/register', [RegistrationController::class, 'register'])->name('register');

@@ -10,6 +10,16 @@
 </head>
 
 <body>
+    <!-- Navbar -->
+    <nav class="p-4 bg-[#1C6B32] shadow">
+        <div class="flex justify-center">
+            <a href="{{ route('landing-page') }}"><img class="ml-5 pt-2 h-[50px] w-[190px]" src="/images/content.png" alt=""></a>
+        </div>
+    </nav>
+
+
+
+
     <section class="bg-gray-50 min-h-screen flex items-center justify-center">
         <!-- login container -->
         <div class="bg-gray-100 flex rounded-2xl shadow-lg max-w-3xl p-5 items-center">

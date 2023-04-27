@@ -1,3 +1,31 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+@import url('@fontsource/roboto');
+@import url('@fontsource/poppins');
+
+
+.font-roboto {
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  .font-roboto-light {
+    font-family: 'Roboto Light', sans-serif;
+  }
+  
+  .font-roboto-medium {
+    font-family: 'Roboto Medium', sans-serif;
+  }
+
+  .font-poppins {
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .font-poppins-light {
+    font-family: 'Poppins Light', sans-serif;
+  }
+  
+  .font-poppins-medium {
+    font-family: 'Poppins Medium', sans-serif;
+  }
