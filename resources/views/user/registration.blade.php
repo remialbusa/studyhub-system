@@ -11,6 +11,11 @@
 
 <body>
 
+    <div id="preloader" class="fixed inset-0 z-50 flex justify-center items-center w-screen h-screen object-cover">
+        <img src="/images/preloader.png" alt="">
+    </div>
+
+
     <!-- Navbar -->
     <nav class="p-4 bg-[#1C6B32] shadow">
         <div class="flex justify-center">
@@ -82,6 +87,7 @@
 
 
     </section>
+    <script src="app.js"></script>
 </body>
 
 </html>

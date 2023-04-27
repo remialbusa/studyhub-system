@@ -1,0 +1,20 @@
+/* Hide the preloader by default */
+#preloader {
+    display: none;
+  }
+  
+  /* Show the preloader with a sliding animation */
+  #preloader.show {
+    display: flex;
+  }
+  
+  /* Add a sliding animation effect */
+  #preloader.show {
+    transform: translateY(-100%);
+  }
+  
+  /* Add a delay before showing the preloader */
+  #preloader:not(.show) {
+    transition-delay: 1s;
+  }
+  

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="scroll-smooth" lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -9,17 +9,31 @@
     @vite('resources/css/app.css')
 </head>
 
-<body class="bg-[#D9D9D9]">
+
+
+
+
+<body class=" bg-[#D9D9D9]">
+    <!-- HTML code for pre-loader -->
+    <!-- <div id="preloader" class="fixed inset-0 z-50 flex items-center justify-center">
+        <div class="loader"><img src="/images/pre-loader.svg" alt=""></div>
+    </div> -->
+    <div id="preloader" class="fixed inset-0 z-50 flex justify-center items-center w-screen h-screen object-cover">
+        <img src="/images/preloader.png" alt="">
+    </div>
+
+
+
 
     <!-- Navbar -->
-    <nav class="p-4 bg-[#1C6B32] shadow">
+    <nav class="sticky top-0 p-4 bg-[#1C6B32] shadow">
         <div class="flex justify-between font-poppins">
             <a href="#"><img class="ml-5 pt-2 h-[50px] w-[190px]" src="/images/content.png" alt=""></a>
 
             <!-- Navbar Links -->
             <div class="ml-[690px] pt-4">
-                <a href="#" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-base font-extrabold">About</a>
-                <a href="#" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-base font-extrabold">Contacts</a>
+                <a href="#about" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-base font-extrabold">About</a>
+                <a href="#contacts" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-base font-extrabold">Contacts</a>
             </div>
             <!-- Navbar Links SignUp|LogIn -->
             <div class="mr-[15px] pt-3">
@@ -58,7 +72,7 @@
 
     </section>
 
-    <section class="pt-[60px] pb-[100px]">
+    <section id="about" class="pt-[60px] pb-[100px]">
         <div class="grid grid-cols-4 gap-4">
             <div class="max-w-sm rounded overflow-hidden shadow-lg">
                 <img class="w-full" src="/images/firstcard.jpg" alt="Sunset in the mountains">
@@ -112,7 +126,7 @@
 
     </section>
 
-    <footer class="bg-[#1C6B32] text-gray-300 py-10">
+    <footer id="contacts" class="bg-[#1C6B32] text-gray-300 py-10">
         <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
             <div class="flex items-center mb-4 md:mb-0">
                 <span class="mr-4">
@@ -140,7 +154,7 @@
 
 
 
-
+    <script src="app.js"></script>
 </body>
 
 </html>

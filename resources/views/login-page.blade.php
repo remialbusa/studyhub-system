@@ -10,8 +10,13 @@
 </head>
 
 <body>
+    <!-- pre-loader -->
+    <div id="preloader" class="fixed inset-0 z-50 flex justify-center items-center w-screen h-screen object-cover">
+        <img src="/images/preloader.png" alt="">
+    </div>
+
     <!-- Navbar -->
-    <nav class="p-4 bg-[#1C6B32] shadow">
+    <nav class=" p-4 bg-[#1C6B32] shadow">
         <div class="flex justify-center">
             <a href="{{ route('landing-page') }}"><img class="ml-5 pt-2 h-[50px] w-[190px]" src="/images/content.png" alt=""></a>
         </div>
@@ -58,18 +63,18 @@
                         <path clip-path="url(#b)" fill="#34A853" d="M0 37l30-23 7.9 1L48 0v48H0z" />
                         <path clip-path="url(#b)" fill="#4285F4" d="M48 48L17 24l-4-3 35-10z" />
                     </svg>Login with Google</button>
-                    
-                    <p class="mt-5 text-xs border-b py-6 ">Forgot your Password?</p>
 
-                    <div class="mt-3 text-xs flex justify-between items-center">
-                        <p>If you don't have an account...</p>
-                        <a href="{{ route('register') }}"><button type="button" class="py-2 px-5 bg-white border rounded-xl hover:scale-110 duration-300">Register</button></a>
-                        
-                    </div>
+                <p class="mt-5 text-xs border-b py-6 ">Forgot your Password?</p>
+
+                <div class="mt-3 text-xs flex justify-between items-center">
+                    <p>If you don't have an account...</p>
+                    <a href="{{ route('register') }}"><button type="button" class="py-2 px-5 bg-white border rounded-xl hover:scale-110 duration-300">Register</button></a>
 
                 </div>
 
-            
+            </div>
+
+
 
             <!-- image -->
             <div class="md:block hidden w-1/2">
