@@ -11,7 +11,7 @@
 
 <body>
 
-    <div id="preloader" class="fixed inset-0 z-50 flex justify-center items-center w-screen h-screen object-cover">
+    <div id="preloader" class="hidden sm:block fixed inset-0 z-50 justify-center items-center w-screen h-screen object-cover">
         <img src="/images/preloader.png" alt="">
     </div>
 

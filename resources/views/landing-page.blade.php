@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <title>Study-Hub Management System</title>
     @vite('resources/css/app.css')
 </head>
@@ -14,51 +16,54 @@
 
 
 <body class=" bg-[#D9D9D9]">
-    <!-- HTML code for pre-loader -->
-    <!-- <div id="preloader" class="fixed inset-0 z-50 flex items-center justify-center">
-        <div class="loader"><img src="/images/pre-loader.svg" alt=""></div>
-    </div> -->
-    <div id="preloader" class="fixed inset-0 z-50 flex justify-center items-center w-screen h-screen object-cover">
+   
+    <div id="preloader" class="hidden sm:block fixed inset-0 z-50 justify-center items-center w-screen h-screen object-cover">
         <img src="/images/preloader.png" alt="">
     </div>
 
+    <nav class="sm:sticky sticky top-0 p-5 bg-[#1C6B32] shadow md:flex md:items-center md:justify-between">
+        <div class="flex justify-between items-center ">
+            <span class="text-2xl font-[Poppins] cursor-pointer">
+                <a href="#"><img class="h-10 inline" src="/images/content.png"></a>
+            </span>
 
-
-
-    <!-- Navbar -->
-    <nav class="sticky top-0 p-4 bg-[#1C6B32] shadow">
-        <div class="flex justify-between font-poppins">
-            <a href="#"><img class="ml-5 pt-2 h-[50px] w-[190px]" src="/images/content.png" alt=""></a>
-
-            <!-- Navbar Links -->
-            <div class="ml-[690px] pt-4">
-                <a href="#about" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-base font-extrabold">About</a>
-                <a href="#contacts" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-base font-extrabold">Contacts</a>
-            </div>
-            <!-- Navbar Links SignUp|LogIn -->
-            <div class="mr-[15px] pt-3">
-                <a href="{{ route('register') }}" class="text-gray-300 hover:bg-white hover:text-[#1C6B32] px-3 py-2 rounded-md text-lg font-extrabold">Sign up</a>
-                <a href="{{ route('login') }}" class="text-gray-300 hover:bg-white hover:text-[#1C6B32] px-3 py-2 rounded-md text-lg font-extrabold">Log in</a>
-            </div>
-
-
+            <span class="text-3xl cursor-pointer mx-2 md:hidden block">
+                <ion-icon name="menu" onclick="Menu(this)"></ion-icon>
+            </span>
         </div>
+
+        <ul class="md:flex md:items-center z-[-1] md:z-auto md:static absolute bg-[#1C6B32] w-full left-0 md:w-auto md:py-0 py-4 md:pl-0 pl-7 md:opacity-100 opacity-0 top-[-400px] transition-all ease-in duration-500">
+            <li class="mx-4 my-6 md:my-0">
+                <a href="#about" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-xl font-extrabold">About</a>
+            </li>
+            <li class="mx-4 my-6 md:my-0">
+                <a href="#contacts" class=" text-gray-300 hover:text-white px-3 py-2 rounded-md text-xl font-extrabold">Contacts</a>
+            </li>
+            <li class="mx-4 my-6 md:my-0">
+                <a href="{{ route('register') }}" class=" text-gray-300 hover:bg-white hover:text-[#1C6B32] px-3 py-2 rounded-md text-xl font-extrabold">Sign Up</a>
+            </li>
+            <li class="mx-4 my-6 md:my-0">
+                <a href="{{ route('login') }}" class=" text-gray-300 hover:bg-white hover:text-[#1C6B32] px-3 py-2 rounded-md text-xl font-extrabold">Log in</a>
+            </li>
+        </ul>
+
+
     </nav>
 
 
     <section>
 
 
-        <div class="flex flex-row place-items-center justify-center font-Rampart">
+        <div class="flex lg:flex-row place-items-center justify-center font-Rampart">
             <div class="w-full h-full">
-                <img class="" src="/images/landingpagebg.png" alt="">
+                <img class="hidden sm:block" src="/images/landingpagebg.png" alt="">
             </div>
 
             <!-- Info -->
             <div class="pr-20">
                 <!-- Study Hub MS div class -->
                 <div class="flex justify-center pr-7">
-                    <h1 class="font-extrabold text-4xl text-[#1C6B32]">Study Hub Management System</h1>
+                    <h1 class="font-extrabold text-4xl  text-[#1C6B32]">Study Hub Management System</h1>
                 </div>
                 <!-- Info/s about SHMS -->
                 <div class="pt-7">
@@ -73,7 +78,7 @@
     </section>
 
     <section id="about" class="pt-[60px] pb-[100px]">
-        <div class="grid grid-cols-4 gap-4">
+        <div class="grid grid-cols-1 mx-auto lg:grid-cols-4 gap-4">
             <div class="max-w-sm rounded overflow-hidden shadow-lg">
                 <img class="w-full" src="/images/firstcard.jpg" alt="Sunset in the mountains">
                 <div class="px-6 py-4">
@@ -153,7 +158,12 @@
     </footer>
 
 
-
+    <script>
+        function Menu(e) {
+            let list = document.querySelector('ul');
+            e.name === 'menu' ? (e.name = "close", list.classList.add('top-[80px]'), list.classList.add('opacity-100')) : (e.name = "menu", list.classList.remove('top-[80px]'), list.classList.remove('opacity-100'))
+        }
+    </script>
     <script src="app.js"></script>
 </body>
 
