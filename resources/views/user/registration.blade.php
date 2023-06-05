@@ -15,7 +15,6 @@
         <img src="/images/preloader.png" alt="">
     </div>
 
-
     <!-- Navbar -->
     <nav class="p-4 bg-[#1C6B32] shadow">
         <div class="flex justify-center">
@@ -29,25 +28,103 @@
             <!-- form -->
             <div class="md:w-1/2 px-16">
                 <h2 class="font-bold text-2xl text-[#002D74] flex justify-center items-center">Create your Account</h2>
-                <p class="text-sm mt-4 text-[#002D74]">Start studying now. Already have an account? <a href="{{ route('login') }}" class="font-bold">Login here.</a> </p>
+                <p class="text-sm mt-4 text-[#002D74]">Start studying now. Already have an account? 
+                    <a href="{{ route('login') }}" class="font-bold">Login here.</a> </p>
+                <br>
+                
+                <form action="{{route('register-user')}}" method="POST" class="flex flex-col gap-4">
+                    @if(Session::has('success'))
+                    {{-- <div class="alert alert-success">{{Session::get('success')}}</div> --}}
+                      <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+                        You have now registered successfully! Click <a href="login" class="font-semibold underline hover:no-underline">Login</a> to continue.
+                      </div>
+                    @endif
+                    @if(Session::has('fail'))
+                    <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                       Please fill up necessary input and try again
+                      </div>
+                    {{-- <div class="alert alert-danger">{{Session::get('fail')}}</div> --}}
+                    @endif
+                    @csrf
+                    <div class="relative">
+                        {{-- <input class="p-2 rounded-xl border w-full" type="text" name="username" id="username" placeholder="Username"> --}}
+                        <input name="username" input id="username" value="{{old('username')}}" 
+                        class="p-2 rounded-xl border w-full" type="text" name="username" id="username" placeholder="Username" />
+                        <span class= "text-red-500">@error('username') {{$message}} @enderror</span>
+                    </div> 
 
-                <form action="" class="flex flex-col gap-4">
-                    <input class="p-2 mt-8 rounded-xl border" type="text" name="" id="" placeholder="Email">
                     <div class="relative">
-                        <input class="p-2 rounded-xl border w-full" type="password" name="password" id="" placeholder="Password">
+                        {{-- <input class="p-2 rounded-xl border w-full" type="text" name="first_name" id="first_name" placeholder="First Name"> --}}
+                        <input name="email_address" input id="email_address" value="{{old('email_address')}}" 
+                            class="p-2 rounded-xl border w-full" type="text" name="email_address" id="email_address" placeholder="Email Address" />
+                        <span class= "text-red-500">@error('email_address') {{$message}} @enderror</span>
+                    </div>
+
+                    <div class="relative">
+                        {{-- <input class="p-2 rounded-xl border w-full" type="text" name="first_name" id="first_name" placeholder="First Name"> --}}
+                        <input name="first_name" input id="first_name" value="{{old('first_name')}}" 
+                            class="p-2 rounded-xl border w-full" type="text" name="first_name" id="first_name" placeholder="First Name" />
+                        <span class= "text-red-500">@error('first_name') {{$message}} @enderror</span>
+                    </div>
+
+                    <div class="relative">
+                        {{-- <input class="p-2 rounded-xl border w-full" type="text" name="last_name" id="last_name" placeholder="Last Name"> --}}
+                        <input name="last_name" input id="last_name" value="{{old('last_name')}}" 
+                            class="p-2 rounded-xl border w-full" type="text" name="last_name" id="last_name" placeholder="Last Name" />
+                        <span class= "text-red-500">@error('last_name') {{$message}} @enderror</span>
+                    </div>
+
+                    <div class="relative">
+                        {{-- <input class="p-2 rounded-xl border w-full" type="text" name="address" id="address" placeholder="Address"> --}}
+                        <input name="address" input id="address" value="{{old('address')}}" 
+                            class="p-2 rounded-xl border w-full" type="text" name="address" id="address" placeholder="Address" />
+                        <span class= "text-red-500">@error('address') {{$message}} @enderror</span>
+                    </div>
+
+                    <div class="relative"> 
+                        {{-- <input class="p-2 rounded-xl border w-full" type="" name="gender" id="gender" placeholder="Gender"> --}}
+                        {{-- fix --}}
+                        <select name="gender" id="gender" 
+                        class="p-2 rounded-xl border w-full">
+                        <option selected>Select one:</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                        <span class= "text-red-500">@error('gender') {{$message}} @enderror</span>
+                    </div>    
+
+                    <div class="relative">
+                        {{-- <input class="p-2 rounded-xl border w-full" type="text" name="phone_number" id="phone_number" placeholder="Phone Number"> --}}
+                        <input name="phone_number" input id="phone_number" value="{{old('phone_number')}}" 
+                            class="p-2 rounded-xl border w-full" type="tel" name="phone_number" id="phone_number" placeholder="Phone Number" />
+                        <span class= "text-red-500">@error('phone_number') {{$message}} @enderror</span>
+                    </div>
+
+                    <div class="relative">
+                        {{-- <input class="p-2 rounded-xl border w-full" type="password" name="password" id="password" placeholder="Password"> --}}
+                        <input name="password" input id="password" value="{{old('password')}}" 
+                            class="p-2 rounded-xl border w-full" type="password" name="password" id="password" placeholder="Password" />
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="gray" class="bi bi-eye absolute top-1/2 right-3 -translate-y-1/2" viewBox="0 0 16 16">
                             <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
                             <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
                         </svg>
+                        <span class= "text-red-500">@error('password') {{$message}} @enderror</span>
                     </div>
+
                     <div class="relative">
-                        <input class="p-2 rounded-xl border w-full" type="password" name="password" id="" placeholder="Confirm Password">
+                        {{-- <input class="p-2 rounded-xl border w-full" type="password" name="r_password" id="" placeholder="Confirm Password"> --}}
+                        <input name="r_password" input id="r_password" value="{{old('password')}}" 
+                            class="p-2 rounded-xl border w-full" type="password" name="r_password" id="r_password" placeholder="Confirm Password" />
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="gray" class="bi bi-eye absolute top-1/2 right-3 -translate-y-1/2" viewBox="0 0 16 16">
                             <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
                             <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
                         </svg>
+                        <span class= "text-red-500">@error('r_password') {{$message}} @enderror</span>
                     </div>
-                    <button class="bg-[#002D74] rounded-xl text-white py-2 hover:scale-105 duration-300">Create an Account</button>
+
+                    <button class="bg-[#002D74] rounded-xl text-white py-2 hover:scale-105 duration-300" 
+                        type="submit" >Create an Account
+                    </button>       
                 </form>
 
                 <div class="mt-10 grid grid-cols-3 items-center text-gray-500">
@@ -71,19 +148,12 @@
 
             </div>
 
-
-
             <!-- image -->
             <div class="md:block hidden w-1/2">
                 <img class=" rounded-2xl" src="studyhub-bg.jpg" alt="">
             </div>
-
-
-
-
-
-
-        </div>
+            
+         </div>
 
 
     </section>

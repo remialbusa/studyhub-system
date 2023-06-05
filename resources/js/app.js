@@ -1,4 +1,5 @@
 import './bootstrap';
+// import './flowbite';
 import smoothscroll from 'smoothscroll-polyfill';
 smoothscroll.polyfill();
 
@@ -16,10 +17,11 @@ navLinks.forEach(link => {
     });
 });
 
-
 window.addEventListener("load", function () {
     const preloader = document.querySelector("preloader");
     preloader.classList.add("hidden");
   });
   
-
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.getElementById('updateDeskList').click();
+  });

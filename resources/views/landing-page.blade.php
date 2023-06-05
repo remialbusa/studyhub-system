@@ -11,10 +11,6 @@
     @vite('resources/css/app.css')
 </head>
 
-
-
-
-
 <body class=" bg-[#D9D9D9]">
    
     <div id="preloader" class="hidden sm:block fixed inset-0 z-50 justify-center items-center w-screen h-screen object-cover">
@@ -34,10 +30,10 @@
 
         <ul class="md:flex md:items-center z-[-1] md:z-auto md:static absolute bg-[#1C6B32] w-full left-0 md:w-auto md:py-0 py-4 md:pl-0 pl-7 md:opacity-100 opacity-0 top-[-400px] transition-all ease-in duration-500">
             <li class="mx-4 my-6 md:my-0">
-                <a href="#about" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-xl font-extrabold">About</a>
+                <a href="#" class=" text-gray-300 hover:bg-white hover:text-[#1C6B32] px-3 py-2 rounded-md text-xl font-extrabold">About</a>
             </li>
             <li class="mx-4 my-6 md:my-0">
-                <a href="#contacts" class=" text-gray-300 hover:text-white px-3 py-2 rounded-md text-xl font-extrabold">Contacts</a>
+                <a href="{{ route('contacts') }}" class=" text-gray-300 hover:bg-white hover:text-[#1C6B32] px-3 py-2 rounded-md text-xl font-extrabold">Contact Us</a>
             </li>
             <li class="mx-4 my-6 md:my-0">
                 <a href="{{ route('register') }}" class=" text-gray-300 hover:bg-white hover:text-[#1C6B32] px-3 py-2 rounded-md text-xl font-extrabold">Sign Up</a>
@@ -46,11 +42,8 @@
                 <a href="{{ route('login') }}" class=" text-gray-300 hover:bg-white hover:text-[#1C6B32] px-3 py-2 rounded-md text-xl font-extrabold">Log in</a>
             </li>
         </ul>
-
-
+        
     </nav>
-
-
     <section>
 
 
@@ -67,14 +60,11 @@
                 </div>
                 <!-- Info/s about SHMS -->
                 <div class="pt-7">
-                    <p class="text-[#1C6B32]">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, obcaecati corrupti repellat at sit vel, ex distinctio sint, praesentium nihil earum! Itaque, soluta quae quod rerum accusantium placeat beatae doloribus.</p>
+                    <p class="text-[#1C6B32]">
+                        Study Hub Management System is a software application designed to manage the day-to-day operations of an educational or private institution, such as a school or college. It provides a centralized platform for administrators, teachers, students, and parents to access and manage information related to student admissions, course schedules, attendance records, grading, and academic performance.</p>
                 </div>
             </div>
-
-
         </div>
-
-
     </section>
 
     <section id="about" class="pt-[60px] pb-[100px]">
@@ -82,25 +72,21 @@
             <div class="max-w-sm rounded overflow-hidden shadow-lg">
                 <img class="w-full" src="/images/firstcard.jpg" alt="Sunset in the mountains">
                 <div class="px-6 py-4">
-                    <div class="text-[#1C6B32] font-bold text-xl mb-2">The Coldest Sunset</div>
-                    <p class="text-gray-700 text-base">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
-                    </p>
-                </div>
-
-            </div>
-
-
-
-            <div class="max-w-sm rounded overflow-hidden shadow-lg">
-                <img class="w-full" src="/images/seccard.jpg" alt="Sunset in the mountains">
-                <div class="px-6 py-4">
-                    <div class="text-[#1C6B32] font-bold text-xl mb-2">The Coldest Sunset</div>
+                    <div class="text-[#1C6B32] font-bold text-xl mb-2">Efficient Resource Management</div>
                     <p class="text-[#1C6B32]">
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
                     </p>
                 </div>
+            </div>
 
+            <div class="max-w-sm rounded overflow-hidden shadow-lg">
+                <img class="w-full" src="/images/seccard.jpg" alt="Sunset in the mountains">
+                <div class="px-6 py-4">
+                    <div class="text-[#1C6B32] font-bold text-xl mb-2">Track Progress</div>
+                    <p class="text-[#1C6B32]">
+                        Lorem ipsum dolor sit am et, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
+                    </p>
+                </div>
             </div>
 
             <div class="max-w-sm rounded overflow-hidden shadow-lg">
@@ -108,29 +94,24 @@
                 <div class="px-6 py-4">
                     <div class="text-[#1C6B32] font-bold text-xl mb-2">The Coldest Sunset</div>
                     <p class="text-[#1C6B32]">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
+                        Lorem ipsum dolor sit am et, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
                     </p>
                 </div>
-
-            </div>
-
+            </div> 
             <div class="max-w-sm rounded overflow-hidden shadow-lg">
-                <img class="w-full" src="/images/fourthcard.jpg" alt="Sunset in the mountains">
+                <img class="w-full" src="/images/thirdcard.jpg" alt="Sunset in the mountains">
                 <div class="px-6 py-4">
                     <div class="text-[#1C6B32] font-bold text-xl mb-2">The Coldest Sunset</div>
                     <p class="text-[#1C6B32]">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptbus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
                     </p>
                 </div>
-
             </div>
-
-
         </div>
-
-
+        
     </section>
 
+    
     <footer id="contacts" class="bg-[#1C6B32] text-gray-300 py-10">
         <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
             <div class="flex items-center mb-4 md:mb-0">
@@ -156,7 +137,6 @@
             </div>
         </div>
     </footer>
-
 
     <script>
         function Menu(e) {

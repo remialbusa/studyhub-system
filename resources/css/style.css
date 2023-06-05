@@ -1,11 +1,15 @@
 /* Hide the preloader by default */
 #preloader {
     display: none;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
   }
   
   /* Show the preloader with a sliding animation */
   #preloader.show {
     display: flex;
+        background-size: 100% 100%;
+    background-repeat: no-repeat;
   }
   
   /* Add a sliding animation effect */
