@@ -10,6 +10,7 @@ class Desklist extends Model
     protected $table = 'desk_list'; // Replace with the actual table name
 
     protected $fillable = [
+        'id',
         'desk_code', 
         'desc', 
         'status'

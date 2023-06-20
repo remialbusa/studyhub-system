@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RegistrationController;
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DeskController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -54,10 +54,16 @@ Route::post('/login', [HomeController::class, 'loginUser'])->name('login-user');
 
 //Route for Student List Page
 Route::get('/student-list', [HomeController::class,'studentListPage'])->name('studentlist-page');
+Route::post('/student-list-add', [HomeController::class, 'studentListAdd'])->name('studentlist-add');
+Route::get('/student-list-delete/{id}', [HomeController::class, 'studentListDelete'])->name('studentlist-delete');
+Route::post('/student-list-update/{id}', [HomeController::class, 'studentListUpdate'])->name('studentlist-update');
+
 
 //Route for Desk List Page
 Route::get('/desk-list', [HomeController::class,'deskListPage'])->name('desklist-page');
-Route::post('/desk-list-add', [HomeController::class, 'deskListPageAdd'])->name('desklist-page-add');
+Route::post('/desk-list-add', [DeskController::class, 'deskListPageAdd'])->name('desklist-page-add');
+Route::get('/delete-desk/{id}', [DeskController::class,'deleteDesk'])->name('delete-desk');
+Route::post('/update-desk/{id}', [DeskController::class,'updateDesk'])->name('update-desk');
 
 
 //Route for History Page
@@ -65,8 +71,9 @@ Route::get('/history', [HomeController::class,'historyPage'])->name('history-pag
 
 //Route for Users Page
 Route::get('/users', [HomeController::class,'usersPage'])->name('users-page');
-Route::get('/delete/{id}', [UserController::class,'delete'])->name('delete-user');
-Route::post('/update/{id}', [UserController::class,'update'])->name('update-user');
+Route::get('/delete-user/{id}', [UserController::class,'deleteUser'])->name('delete-user');
+Route::post('/update-user/{id}', [UserController::class,'updateUser'])->name('update-user');
+
 
 
 

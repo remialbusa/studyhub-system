@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function delete($id) {
+    public function deleteUser($id) {
         $user = User::find($id);
         $user->delete();
         if(!$user){
@@ -16,7 +16,7 @@ class UserController extends Controller
         response()->json(['success', ['successful' => $user]], 200);
     }
 
-    public function supdate(Request $request, $id) {
+    public function updateUser(Request $request, $id) {
         $user = User::findOrFail($id); // Assuming you have the user ID
         $user->first_name = $request->input('first_name');
         $user->last_name = $request->input('last_name');
