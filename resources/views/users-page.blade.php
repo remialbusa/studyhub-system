@@ -286,8 +286,8 @@
 
         <script>
             function edituser(data) {
-            
-                document.getElementById('id').value = data.id;         
+
+                document.getElementById('id').value = data.id;
                 document.getElementById('email_address').value = data.email_address;
                 document.getElementById('first_name').value = data.first_name;
                 document.getElementById('last_name').value = data.last_name;
@@ -298,43 +298,41 @@
 
             }
 
-            
-             function updateUser() {
+            function updateUser() {
                 // Send the AJAX request to the Laravel backend
-                var id = document.getElementById('id').value      
+                var id = document.getElementById('id').value
                 var email_address = document.getElementById('email_address').value
                 var first_name = document.getElementById('first_name').value
-                var last_name = document.getElementById('last_name').value 
+                var last_name = document.getElementById('last_name').value
                 var phone_number = document.getElementById('phone_number').value
                 var address = document.getElementById('address').value
-                 
-                    console.log(id)
 
-                    var xhr = new XMLHttpRequest();
-                    xhr.open("POST", '/update/' + id, true);
-                    xhr.setRequestHeader('X-CSRF-TOKEN', '{{ csrf_token() }}');
+                console.log(id)
 
-                    xhr.onreadystatechange = function() {
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", '/update-user/' + id, true);
+                xhr.setRequestHeader('X-CSRF-TOKEN', '{{ csrf_token() }}');
+
+                xhr.onreadystatechange = function() {
                     if (xhr.readyState === XMLHttpRequest.DONE) {
                         if (xhr.status === 200) {
-                        console.log('Data saved successfully.');
-                        window.location.reload();
+                            console.log('Data saved successfully.');
+                            window.location.reload();
                         } else {
-                        console.error('Error saving data. Status code: ' + xhr.status);
+                            console.error('Error saving data. Status code: ' + xhr.status);
                         }
                     }
-                    };
-                    var formData = new FormData();
-                    formData.append('id', id);
-                    formData.append('email_address', email_address);
-                    formData.append('first_name', first_name);
-                    formData.append('last_name', last_name);
-                    formData.append('phone_number', phone_number);
-                    formData.append('address', address);
-                    xhr.send(formData);
-                 
-             }  
-            
+                };
+                var formData = new FormData();
+                formData.append('id', id);
+                formData.append('email_address', email_address);
+                formData.append('first_name', first_name);
+                formData.append('last_name', last_name);
+                formData.append('phone_number', phone_number);
+                formData.append('address', address);
+                xhr.send(formData);
+
+            };
 
             function deleteuser(data) {
                 console.log(data);
@@ -346,11 +344,11 @@
                 button.addEventListener('click', function() {
 
                     var xhr = new XMLHttpRequest();
-                    xhr.open("GET", "/delete/" + data.id, true);
+                    xhr.open("GET", "/delete-user/" + data.id, true);
                     xhr.onreadystatechange = function() {
                         if (xhr.readyState === XMLHttpRequest.DONE) {
                             if (xhr.status === 200) {
-                                
+
                                 console.log("User deleted successfully.");
                                 window.location.reload();
                             } else {
@@ -361,6 +359,7 @@
                     xhr.send();
                 });
             }
+
         </script>
 
 

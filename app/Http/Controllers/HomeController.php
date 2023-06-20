@@ -7,7 +7,8 @@ use DB;
 
 use App\Models\User;
 use App\Models\Desklist;
-use App\Models\deskupdate;
+// use App\Models\deskupdate;
+use App\Models\Assignlist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
@@ -60,6 +61,56 @@ class HomeController extends Controller
         );
         return view('studentlist-page', $data);
     }
+
+    public function studentListAdd(Request $request) {
+        $request->validate([
+            // 'add_id' => 'required|string',
+            'add_student_id' => 'required|string',
+            'add_desk_id' => 'required|string',
+            'add_remarks' => 'required|string',
+            'add_status' => 'required|string',
+            // 'add_desk_number' => 'required|string',
+        ]);
+
+        $data = new Assignlist();
+        $data->student_id = $request->add_student_id;
+        $data->desk_id = $request->add_desk_id;
+        $data->remarks = $request->add_remarks;
+        $data->status = $request->add_status;
+        // $data->desk_number = $request->add_desk_number;
+        $res1 = $data->save();
+        if($res1) {
+            return redirect('/student-list')-> with('success', 'New desk added successfully');
+        } else {
+            return back()-> with('fail', 'Something is wrong');
+        }
+
+    }
+
+    public function studentListUpdate(Request $request, $id) {
+        $data = Assignlist::findOrFail($id); // Assuming you have the user ID
+        // $data->id = $request->input('id');
+        $data->student_id = $request->input('student_id');
+        $data->desk_id = $request->input('desk_id');
+        $data->remarks = $request->input('remarks');
+        $data->status = $request->input('status');
+        $data->save();
+        if(!$data){
+            response()->json(['error' => 'user cannot be empty'], 402);
+        }
+        /* response()->json(['success', ['successful' => $user]], 200); */
+        return back()->with('success', 'You have now update successfully');
+    }
+
+    public function studentListDelete($id) {
+        $data = Assignlist::find($id);
+        $data->delete();
+        if(!$data){
+            response()->json(['error' => 'user cannot be empty'], 402);
+        }
+        response()->json(['success', ['successful' => $data]], 200);
+    }
+
 
     function deskListPage(){
         // return view('deskList-page');
@@ -117,10 +168,10 @@ class HomeController extends Controller
         $dsk->status = $request->first_name;
         $res1 = $dsk->save();
         if($res1) {
-            return redirect('/desk_list')->with('success', 'New desk added successfully');
+            return redirect('/desk_list')-> with('success', 'New desk added successfully');
              // return redirect('dashboard')-> with('success', 'You have now registered successfully');
         } else {
-            return back()->with('fail', 'Something is wrong');
+            return back()-> with('fail', 'Something is wrong');
         }
  
     }
