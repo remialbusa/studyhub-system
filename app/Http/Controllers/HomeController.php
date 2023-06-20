@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use DB;
 // use App\Http\Controllers\DB;
-use Hash;
-use Session;
+
 use App\Models\User;
 use App\Models\Desklist;
 use App\Models\deskupdate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
+
+
 
 class HomeController extends Controller
 {
@@ -39,13 +42,13 @@ class HomeController extends Controller
         } 
         // $data= $request->input();
         // $request->session()->put('first_name', $data['first_name']);
+        
         // echo session('first_name');
     } 
 
-    function landingPage(){
-        return view('landing-page');
-    }
 
+
+    
     function contactsPage(){
         return view('contacts-page');
     }
@@ -114,10 +117,10 @@ class HomeController extends Controller
         $dsk->status = $request->first_name;
         $res1 = $dsk->save();
         if($res1) {
-            return redirect('/desk_list')-> with('success', 'New desk added successfully');
+            return redirect('/desk_list')->with('success', 'New desk added successfully');
              // return redirect('dashboard')-> with('success', 'You have now registered successfully');
         } else {
-            return back()-> with('fail', 'Something is wrong');
+            return back()->with('fail', 'Something is wrong');
         }
  
     }
@@ -148,18 +151,4 @@ class HomeController extends Controller
 
             // return view('user.dashboard');
     }
-
-    // public function registerDelete($id)
-    // {
-    //     $record = User::find($id);
-        
-    //     if (!$record) {
-    //         // Handle case when record does not exist
-    //     }
-    
-    //     $record->delete();
-    
-    //     // Redirect or return a response indicating successful deletion
-    // }
-    
 }

@@ -23,7 +23,7 @@
     <!-- Navbar -->
     <nav class=" p-4 bg-[#1C6B32] shadow">
         <div class="flex justify-center">
-            <a href="{{ route('landing-page') }}"><img class="ml-5 pt-2 h-[50px] w-[190px]" src="/images/content.png"
+            <a href="{{ route('login') }}"><img class="ml-5 pt-2 h-[50px] w-[190px]" src="/images/content.png"
                     alt=""></a>
         </div>
     </nav>
