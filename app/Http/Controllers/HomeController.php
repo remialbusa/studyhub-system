@@ -2,21 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use DB;
 // use App\Http\Controllers\DB;
 
 use App\Models\User;
 use App\Models\Desklist;
 use App\Models\deskupdate;
+use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
+
 
 
 
 class HomeController extends Controller
 {
-    function login(){
+    function login()
+    {
         return view('login-page');
     }
 
@@ -24,51 +27,62 @@ class HomeController extends Controller
     //     return view('logout');
     // }
 
-    public function loginUser(Request $request) {
+    public function loginUser(Request $request)
+    {
         $request->validate([
             'email_address' => 'required|string|email',
             'password' => 'required|string',
         ]);
-        $user = User::where('email_address' , '=' , $request->email_address)->first();
+        $user = User::where('email_address', '=', $request->email_address)->first();
         if ($user) {
-            if(Hash::check($request->password, $user->password)) {
+            if (Hash::check($request->password, $user->password)) {
                 $request->session()->put('loginId', $user->id);
                 return redirect('dashboard');
             } else {
-                    return back()-> with('fail', 'Password does not match.');
-                }
-            } else {
-            return back()-> with('fail', 'This email is not registered.');
-        } 
+                return back()->with('fail', 'Password does not match.');
+            }
+        } else {
+            return back()->with('fail', 'This email is not registered.');
+        }
         // $data= $request->input();
         // $request->session()->put('first_name', $data['first_name']);
-        
+
         // echo session('first_name');
-    } 
+    }
 
 
 
-    
-    function contactsPage(){
+
+    function contactsPage()
+    {
         return view('contacts-page');
     }
 
-    function studentListPage(){
+    function studentListPage()
+    {
         // return view('studentList-page');
         $data = array(
-        'list2' => DB::table('assign_list')->get()
+            'list2' => Student::all()
         );
         return view('studentlist-page', $data);
     }
 
-    function deskListPage(){
+    function deskListPage()
+    {
         // return view('deskList-page');
         $data = array(
-            'list' => DB::table('desk_list')->get()
+            'list' => Desklist::all()
         );
         return view('deskList-page', $data);
     }
 
+
+    function assignDesk()
+    {
+        $deskCodes = DeskList::pluck('desk_code');
+
+        return view('deskList-page', ['deskCodes' => $deskCodes]);
+    }
 
     // FIX HEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
     #update 
@@ -79,16 +93,16 @@ class HomeController extends Controller
                 'desk_code' => 'string',
                 'desc' => 'string',
                 'status' => 'string',
-                'date' => 'string', 
+                'date' => 'string',
             ]);
 
             $dsk = desklist::where('id', $id)->first();
 
-            $dsk->desk_code= $request->string;
+            $dsk->desk_code = $request->string;
             $dsk->desc = $request->string;
             $dsk->status = $request->string;
             $dsk->created_at = $request->string;
- 
+
             $dsk->save();
 
             return response([
@@ -104,51 +118,49 @@ class HomeController extends Controller
 
     #add
     #FIX DESK MODEL
-    public function deskListPageAdd(Request $request) {
+    public function deskListPageAdd(Request $request)
+    {
         $request->validate([
-            'desc_code' => 'required|string',
-            'desc' => 'required|string',
-            'status' => 'required|string',
+            'desk_code' => 'required',
+            'desc' => 'required',
+            'status' => 'required',
         ]);
 
-        $dsk = new desklist();
-        $dsk->desc_code = $request->username;
-        $dsk->desc = $request->email_address;
-        $dsk->status = $request->first_name;
-        $res1 = $dsk->save();
-        if($res1) {
-            return redirect('/desk_list')->with('success', 'New desk added successfully');
-             // return redirect('dashboard')-> with('success', 'You have now registered successfully');
-        } else {
-            return back()->with('fail', 'Something is wrong');
-        }
- 
+        $dsk = new Desklist();
+        $dsk->desk_code = $request->desk_code;
+        $dsk->desc = $request->desc;
+        $dsk->status = $request->status;
+        $dsk->save();
+        return back()->with('success');
     }
 
-    function historyPage(){
+    function historyPage()
+    {
         return view('history-page');
     }
 
     // //for display in users
     // function index(){
-    function usersPage(){
+    function usersPage()
+    {
         $data = array(
             'list' => DB::table('user')->get()
         );
         return view('users-page', $data);
     }
 
-    function dashboardPage(){
+    function dashboardPage()
+    {
         $users = User::all();
-        
+
         return view('user.dashboard', ['users' => $users]);
 
-            $data = array();    
-            if(Session::has('loginId')) {
-                $data = User::where('id', '=', Session::get('loginId'))->first();
-            }
-            return view('dashboard', compact('data'));
+        $data = array();
+        if (Session::has('loginId')) {
+            $data = User::where('id', '=', Session::get('loginId'))->first();
+        }
+        return view('dashboard', compact('data'));
 
-            // return view('user.dashboard');
+        // return view('user.dashboard');
     }
 }

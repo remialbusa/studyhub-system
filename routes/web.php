@@ -47,9 +47,14 @@ Route::group(['middleware' => ['auth']],function () {
 
     //Route for Student List Page
     Route::get('/student-list', [HomeController::class,'studentListPage'])->name('studentlist-page');
+    Route::post('/student-registration', [AuthController::class, 'registerStudent'])->name('register-student');
+    Route::post('/student-update', [AuthController::class, 'updateStudent'])->name('update-student');
+    Route::get('/student-delete/{id}', [AuthController::class, 'deleteStudent'])->name('delete-student');
+
 
     //Route for Desk List Page
     Route::get('/desk-list', [HomeController::class,'deskListPage'])->name('desklist-page');
+    Route::get('/assign-desk', [HomeController::class,'assignDesk'])->name('assign-desk');
     Route::post('/desk-list-add', [HomeController::class, 'deskListPageAdd'])->name('desklist-page-add');
 
 
@@ -61,6 +66,7 @@ Route::group(['middleware' => ['auth']],function () {
     Route::get('/delete/{id}', [UserController::class,'delete'])->name('delete-user');
     Route::post('/update/{id}', [UserController::class,'update'])->name('update-user');
 
+     
     //Route for logout button   
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');;
 
