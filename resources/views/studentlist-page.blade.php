@@ -155,7 +155,7 @@
                     <td>{{ $student->created_at }}</td>
                     <td>
                         <div class="flex gap-2">
-                            <button id="assignDesk" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" >Assign Desk</button>
+                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="openDeskList()">Assign Desk</button>
                             <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onclick="openDeleteConfirmation('{{ $student->id }}')">Delete</button>
                         </div>
                     </td>
@@ -221,23 +221,20 @@
 
     <!-- Modal For Assign Desk -->
     <div id="deskModal" class="fixed inset-0 flex items-center justify-center z-50 hidden">
-        <div class="bg-gray-800 bg-opacity-75 absolute inset-0"></div>
-        <div class="bg-white rounded-lg p-6 max-w-md mx-auto">
-            <h2 class="text-xl font-semibold mb-4">Assign Desk</h2>
-            <!-- Add your form or content for the modal here -->
-            <form id="assignDeskForm" action="{{ route('assign-desk') }}" method="POST">
-                @csrf
-                <!-- Add your form fields and submit button here -->
-                <input type="hidden" name="deskId" id="deskId">
-                <select name="deskCode" id="deskCode" class="mb-2">
-                    <option value="">Select Desk Code</option>
-                </select>
-                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Assign</button>
-                <button type="button" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded ml-2" onclick="closeDeskModal()">Cancel</button>
-            </form>
-        </div>
+    <div class="bg-white rounded-lg p-6 max-w-md mx-auto">
+        <h2 class="text-xl font-semibold mb-4">Assign Desk</h2>
+        <!-- Add your form or content for the modal here -->
+        <form id="assignDeskForm" action="{{ route('assign-desk') }}" method="POST">
+            @csrf
+            <!-- Add your form fields and submit button here -->
+            <input type="hidden" name="deskId" id="deskId">
+            <select name="fetchDeskCodes" id="fetchDeskCodes" class="mb-2">
+                <option disabled selected>-- Select Desk Code --</option>
+            </select>
+            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Assign</button>
+            <button type="button" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded ml-2" onclick="closeDeskModal()">Cancel</button>
+        </form>
     </div>
-
 
     {{-- end of content --}}
 
@@ -369,53 +366,57 @@
         });
 
 
-        
+        const assignDeskBtn = document.getElementById('assignDeskBtn');
+
         function openDeskList() {
             // Show the modal
             document.getElementById('deskModal').classList.remove('hidden');
+            console.log('test');
+            fetchDeskCodes();
         }
+
+        function fetchDeskCodes() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "/assign-desk-to-student", true); // Update the URL to the correct route
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        var response = JSON.parse(xhr.responseText);
+                        var len = 0;
+                        if (response['data'] != null) {
+                            len = response['data'].length;
+                        }
+                        console.log(response);
+                        if (len > 0) {
+                            // Clear previous options
+                            $('#fetchDeskCodes').empty();
+
+                            // Read data and create <option>
+                            for (var i = 0; i < len; i++) {
+                                var id = response['data'][i].id;
+                                var code = response['data'][i].desk_code;
+                                
+                                var option = "<option value='" + id + "'>" + code + "</option>";
+                                console.log(option);
+                                $("#fetchDeskCodes").append(option);
+                            }
+                        } else {
+                            console.error("Error" + xhr.status);
+                        }
+                    }
+                }
+            };
+            xhr.send();
+        }
+
+
+
 
         // Function to close the desk modal
         function closeDeskModal() {
             // Hide the modal
             document.getElementById('deskModal').classList.add('hidden');
         }
-
-
-        $(document).ready(function() {
-            // Open desk modal
-            $('#openDeskModal').click(function() {
-                // Clear previous options
-                $('#deskCode').empty();
-
-                // Fetch desk codes using AJAX
-                $.ajax({
-                    url: "{{ route('assign-desk') }}",
-                    method: "GET",
-                    dataType: "json",
-                    success: function(response) {
-                        // Populate the select dropdown with desk codes
-                        var deskCodes = response.deskCodes;
-                        var selectOptions = '';
-                        for (var i = 0; i < deskCodes.length; i++) {
-                            selectOptions += '<option value="' + deskCodes[i] + '">' + deskCodes[i] + '</option>';
-                        }
-                        $('#deskCode').append(selectOptions);
-
-                        // Show the desk modal
-                        $('#deskModal').removeClass('hidden');
-                    },
-                    error: function(xhr, status, error) {
-                        console.error(error);
-                    }
-                });
-            });
-
-            // Close desk modal
-            function closeDeskModal() {
-                $('#deskModal').addClass('hidden');
-            }
-        });
     </script>
 
     <!-- JavaScript code to handle the modal behavior -->

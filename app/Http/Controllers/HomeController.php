@@ -76,13 +76,23 @@ class HomeController extends Controller
         return view('deskList-page', $data);
     }
 
-
     function assignDesk()
     {
-        $deskCodes = DeskList::pluck('desk_code');
+        $deskCodes = DeskList::pluck('desk_code')->toArray();
 
-        return view('deskList-page', ['deskCodes' => $deskCodes]);
+        return response()->json(['deskCodes' => $deskCodes]);
     }
+
+    public function getDeskCode()
+    {
+        $desks['data'] = DeskList::orderBy("desk_code", "asc")
+            ->select('id', 'desk_code')
+            ->get();
+        
+        return response()->json(['desks' => $desks]);
+    }
+
+
 
     // FIX HEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
     #update 

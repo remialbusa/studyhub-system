@@ -56,6 +56,7 @@ Route::group(['middleware' => ['auth']],function () {
     Route::get('/desk-list', [HomeController::class,'deskListPage'])->name('desklist-page');
     Route::get('/assign-desk', [HomeController::class,'assignDesk'])->name('assign-desk');
     Route::post('/desk-list-add', [HomeController::class, 'deskListPageAdd'])->name('desklist-page-add');
+    Route::get('/assign-desk-to-student', [HomeController::class, 'getDeskCode']);
 
 
     //Route for History Page
