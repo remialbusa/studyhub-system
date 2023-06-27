@@ -221,19 +221,19 @@
 
     <!-- Modal For Assign Desk -->
     <div id="deskModal" class="fixed inset-0 flex items-center justify-center z-50 hidden">
-    <div class="bg-white rounded-lg p-6 max-w-md mx-auto">
-        <h2 class="text-xl font-semibold mb-4">Assign Desk</h2>
-        <!-- Add your form or content for the modal here -->
-        <form id="assignDeskForm" action="{{ route('assign-desk') }}" method="POST">
-            @csrf
-            <!-- Add your form fields and submit button here -->
-            <input type="hidden" name="deskId" id="deskId">
-            <select name="fetchDeskCodes" id="fetchDeskCodes" class="mb-2">
-                <option disabled selected>-- Select Desk Code --</option>
-            </select>
-            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Assign</button>
-            <button type="button" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded ml-2" onclick="closeDeskModal()">Cancel</button>
-        </form>
+        <div class="bg-white rounded-lg p-6 max-w-md mx-auto">
+            <h2 class="text-xl font-semibold mb-4">Assign Desk</h2>
+            <!-- Add your form or content for the modal here -->
+            <form id="assignDeskForm" action="{{ route('assign-desk') }}" method="POST">
+                @csrf
+                <!-- Add your form fields and submit button here -->
+                <select name="fetchDeskCodes" id="fetchDeskCodes" class="mb-2">
+                    <option disabled selected>-- Select Desk Code --</option>
+                </select>
+                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Assign</button>
+                <button type="button" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded ml-2" onclick="closeDeskModal()">Cancel</button>
+            </form>
+        </div>
     </div>
 
     {{-- end of content --}}
@@ -322,6 +322,7 @@
         </div>
     </div>
 
+
     <script>
         function openDeleteConfirmation(studentId) {
             // Show the delete confirmation modal
@@ -351,9 +352,12 @@
             document.getElementById('deleteConfirmationModal').classList.add('hidden');
         }
 
+
         const addStudentBtn = document.getElementById('addStudentBtn');
+
         const addStudentModal = document.getElementById('addStudentModal');
         const cancelBtn = document.getElementById('cancelBtn');
+
 
         // Show the modal when the button is clicked
         addStudentBtn.addEventListener('click', () => {
@@ -364,41 +368,43 @@
         cancelBtn.addEventListener('click', () => {
             addStudentModal.classList.add('hidden');
         });
+    </script>
 
 
-        const assignDeskBtn = document.getElementById('assignDeskBtn');
 
+    <script>
         function openDeskList() {
             // Show the modal
             document.getElementById('deskModal').classList.remove('hidden');
-            console.log('test');
-            fetchDeskCodes();
+            getDeskCodes();
+
         }
 
-        function fetchDeskCodes() {
+        function getDeskCodes() {
             var xhr = new XMLHttpRequest();
             xhr.open("GET", "/assign-desk-to-student", true); // Update the URL to the correct route
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === XMLHttpRequest.DONE) {
                     if (xhr.status === 200) {
                         var response = JSON.parse(xhr.responseText);
+                        var desks = response.desks.data;
+                        console.log(desks);
                         var len = 0;
-                        if (response['data'] != null) {
-                            len = response['data'].length;
+                        if (desks != null) {
+                            len = desks.length;
                         }
-                        console.log(response);
                         if (len > 0) {
-                            // Clear previous options
-                            $('#fetchDeskCodes').empty();
-
+                            var select = document.getElementById('fetchDeskCodes');
+                            var i, selectLength = select.options.length - 1;
+                            for (i = selectLength; i >= 0; i--) {
+                                select.remove(i);
+                            }
                             // Read data and create <option>
                             for (var i = 0; i < len; i++) {
-                                var id = response['data'][i].id;
-                                var code = response['data'][i].desk_code;
-                                
-                                var option = "<option value='" + id + "'>" + code + "</option>";
-                                console.log(option);
-                                $("#fetchDeskCodes").append(option);
+                                var opt = document.createElement('option');
+                                opt.value = desks[i].id;
+                                opt.innerHTML = desks[i].desk_code;
+                                select.appendChild(opt);
                             }
                         } else {
                             console.error("Error" + xhr.status);
