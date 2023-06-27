@@ -76,11 +76,27 @@ class HomeController extends Controller
         return view('deskList-page', $data);
     }
 
-    function assignDesk()
+    function assignDesk(Request $request)
     {
-        $deskCodes = DeskList::pluck('desk_code')->toArray();
+        $deskCode = $request->input('fetchDeskCodes');
 
-        return response()->json(['deskCodes' => $deskCodes]);
+        // Validate the input if needed
+
+        // Select a student to update
+        $student = Student::find($request->student_id);
+
+        
+        if ($student) {
+            // Update the desk column of the selected student
+            $student->desk = $deskCode;
+            $student->save();
+
+            // Return a response indicating the successful assignment
+            return back()->with('success', 'Desk Assigned Successfully');
+        } else {
+            // Handle the case when no student is found
+            return back()->with('error', 'No student found');
+        }
     }
 
     public function getDeskCode()
@@ -88,7 +104,7 @@ class HomeController extends Controller
         $desks['data'] = DeskList::orderBy("desk_code", "asc")
             ->select('id', 'desk_code')
             ->get();
-        
+
         return response()->json(['desks' => $desks]);
     }
 

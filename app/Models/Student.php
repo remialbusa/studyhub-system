@@ -17,5 +17,6 @@ class Student extends Model
         'last_name',
         'phone_no',
         'address',
+        'desk',
     ];
 }

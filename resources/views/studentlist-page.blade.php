@@ -155,7 +155,7 @@
                     <td>{{ $student->created_at }}</td>
                     <td>
                         <div class="flex gap-2">
-                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="openDeskList()">Assign Desk</button>
+                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="openDeskList('{{ $student->id }}')">Assign Desk</button>
                             <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onclick="openDeleteConfirmation('{{ $student->id }}')">Delete</button>
                         </div>
                     </td>
@@ -227,6 +227,7 @@
             <form id="assignDeskForm" action="{{ route('assign-desk') }}" method="POST">
                 @csrf
                 <!-- Add your form fields and submit button here -->
+                <input type="text" name="student_id" id="student_id" hidden>
                 <select name="fetchDeskCodes" id="fetchDeskCodes" class="mb-2">
                     <option disabled selected>-- Select Desk Code --</option>
                 </select>
@@ -373,11 +374,11 @@
 
 
     <script>
-        function openDeskList() {
+        function openDeskList($id) {
             // Show the modal
             document.getElementById('deskModal').classList.remove('hidden');
             getDeskCodes();
-
+            document.getElementById('student_id').value = $id;
         }
 
         function getDeskCodes() {
