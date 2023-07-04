@@ -50,7 +50,14 @@ class HomeController extends Controller
         // echo session('first_name');
     }
 
-
+    public function deleteDesk($id) {
+        $data = Desklist::findOrFail($id);
+        $data->delete();
+        if(!$data){
+            response()->json(['error' => 'desk cannot be empty'], 402);
+        }
+        response()->json(['success', ['successful' => $data]], 200);
+    }
 
 
     function contactsPage()
