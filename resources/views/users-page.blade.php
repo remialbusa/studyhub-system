@@ -76,10 +76,10 @@
                                 class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Desk
                                 List</a>
                         </li>
-                        <li>
+                        {{-- <li>
                             <a href="history"
                                 class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">History</a>
-                        </li>
+                        </li> --}}
                     </ul>
                 </li>
                 <a href="users"
@@ -157,7 +157,9 @@
                                 data-modal-toggle="popup-modal"
                                 class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
                                 type="button">Delete</button>
-                    </tr @endforeach
+                        </td>
+                    </tr 
+                @endforeach
             </tbody>
         </table>
 

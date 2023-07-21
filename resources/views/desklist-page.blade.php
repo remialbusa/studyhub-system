@@ -74,9 +74,9 @@
                                 List</a>
                         </li>
                         <li>
-                            <a href="history"
+                            {{-- <a href="history"
                                 class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">History</a>
-                        </li>
+                        </li> --}}
                     </ul>
                 </li>
                 <a href="users"
@@ -91,18 +91,11 @@
                 </a>
                 </li>
                 <li>
-                    <a href="login"
-                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                        <svg aria-hidden="true"
-                            class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                            fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M5 4a3 3 0 00-3 3v6a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3H5zm-1 9v-1h5v2H5a1 1 0 01-1-1zm7 1h4a1 1 0 001-1v-1h-5v2zm0-4h5V8h-5v2zM9 8H4v2h5V8z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                        <span class="flex-1 ml-3 whitespace-nowrap">Logout</span>
+                    <a href="{{ route('logout') }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                       <svg aria-hidden="true" class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5 4a3 3 0 00-3 3v6a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3H5zm-1 9v-1h5v2H5a1 1 0 01-1-1zm7 1h4a1 1 0 001-1v-1h-5v2zm0-4h5V8h-5v2zM9 8H4v2h5V8z" clip-rule="evenodd"></path></svg>
+                       <span class="flex-1 ml-3 whitespace-nowrap">Logout</span>
                     </a>
-                </li>
+                 </li>
             </ul>
         </div>
     </aside>
@@ -162,15 +155,14 @@
                                 onclick="openDeskList('{{ $data->id }}')">Edit</button>
 
                             {{-- WORKS BUT WITH ERROR --}}
-                            {{-- <button type="button" button data-modal-target="popup-modal"
-                                data-modal-toggle="popup-modal"
-                                class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-                                onclick="openDeleteConfirmation('{{ $data->id }}')">Delete</button> --}}
-
-                                <button type="button" button data-modal-target="deleteConfirmationModal"
-                                data-modal-toggle="deleteConfirmationModal"
+                            <button type="button" button data-modal-target="deleteConfirmationModal"
                                 class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
                                 onclick="openDeleteConfirmation('{{ $data->id }}')">Delete</button>
+
+                                {{-- <button type="button" button data-modal-target="deleteConfirmationModal"
+                                data-modal-toggle="deleteConfirmationModal"
+                                class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                                onclick="openDeleteConfirmation('{{ $data->id }}')">Delete</button> --}}
                         </td>
                     </tr>
                 @endforeach
@@ -178,16 +170,86 @@
         </table>
     </div>
 
+
+
+    <!-- Modal For New Desk -->
+    <div id="addDeskModal" class="fixed z-10 inset-0 overflow-y-auto hidden">
+        <div class="flex items-center justify-center min-h-screen">
+            <div class="bg-white w-1/2 mx-auto p-6 rounded shadow">
+                <!-- Modal content -->
+                <h2 class="text-lg font-bold mb-4">New Desk</h2>
+                <form action="{{ route('desklist-page-add') }}" method="POST" class="flex flex-col gap-4">
+                    @if (Session::has('success'))
+                        <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+                            role="alert">
+                            You have now added desk successfully!
+                        </div>
+                    @endif
+                    @if (Session::has('fail'))
+                        <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                            role="alert">
+                            Please fill up necessary input and try again
+                        </div>
+                    @endif
+                    @csrf
+
+                    <!-- Add Desk form fields -->
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="desk_code">
+                            Desk Code
+                        </label>
+                        <input
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="desk_code" type="text" name="desk_code" placeholder="Enter Desk Code" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="email_address">
+                            Desc
+                        </label>
+                        <input
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="desc" type="text" name="desc" placeholder="Enter description"
+                            required>
+                    </div>   
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="email_address">
+                            Status
+                        </label>
+                        <input
+                            class="shadow appea rance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="status" type="text" name="status" placeholder="Enter status"
+                            required>
+                    </div>   
+                    <!-- Add more form fields as needed -->
+
+                    <!-- Modal footer -->
+                    <div class="flex justify-end">
+                        <button type="button"
+                            class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-2 px-4 rounded mr-2"
+                            id="cancelBtn">Cancel</button>
+                        <button type="submit"
+                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+    
     <!-- Edit user modal -->
+    {{-- <div id="editUserModal" tabindex="-1" aria-hidden="true" --}}
     <div id="deskListModal" tabindex="-1" aria-hidden="true"
-    {{-- <div id="addDeskModal" tabindex="-1" aria-hidden="true" --}}
         class="fixed top-0 left-0 right-0 z-50 items-center justify-center hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
         <div class="bg-white w-1/2 mx-auto p-6 rounded shadow">
             <!-- Modal content -->
             <form method="POST" class="relative bg-white rounded-lg shadow dark:bg-gray-700">
 
                 <!-- Modal header -->
+                {{-- <div id="editUserModal" class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600"> --}}
                 <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
+
                     <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
                         Edit Desk
                     </h3>
@@ -195,7 +257,7 @@
                         @if (Session::has('success'))
                             <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
                                 role="alert">
-                                You have now registered successfully!
+                                Edited successfully!
                             </div>
                         @endif
                         @if (Session::has('fail'))
@@ -205,7 +267,7 @@
                             </div>
                         @endif
                         @csrf
-                        <button type="button"
+                        {{-- <button type="button"
                             class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
                             data-modal-hide="editUserModal">
                             <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
@@ -214,7 +276,9 @@
                                     d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
                                     clip-rule="evenodd"></path>
                             </svg>
-                        </button>
+                        </button> --}}
+
+                        
                 </div>
                 <!-- end of Modal header -->
    
@@ -248,10 +312,19 @@
                 <!-- end of Modal body -->
 
                 <!-- Modal footer -->
-                <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+                {{-- <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
                     <button type="submit"
                         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Save</button>
+                </div> --}}
+
+                <div class="flex justify-end">
+                    <button type="button"
+                        class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-2 px-4 rounded mr-2"
+                        id="cancelBtn">Cancel</button>
+                    <button type="submit"
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add</button>
                 </div>
+
             </form>
         </div>
     </div>
